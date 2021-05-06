@@ -41,6 +41,9 @@ class Dialog(QDialog, Ui_Dialog):
         for file in ft_file_path.iterdir():
             if file.suffix == ".docx":
                 front_doc, front_lp = modules.extractfileNameandFileLP(file)
+                if front_lp == "":
+                    QtWidgets.QMessageBox.information(self, "Error!", "Please make sure LP is present in the file name and in '-xx-XX' format ")
+                    exit()
                 bt_file_name = modules.findBTmatch(front_doc, front_lp, bt_file_path)
                 xls_file_name = modules.findXLSmatch(front_doc, front_lp, xls_file_path)
                 if bt_file_name is None:
