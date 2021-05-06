@@ -18,7 +18,11 @@ def extractfileNameandFileLP(ft_doc):
                       "-Source_TXLF", "-XML_Medavante_TXLF", "-Non-Parsable", "-MS Word_TXML", "-MS Word_TXML_translate comments", "-MS Excel_TXML",
                       "-MS PPT_TXML", "-MS PPT_TXML_no notes", "-IDML_TXML", "-Source_TXML", "-XML_Medavante_TXML", "-ERT_JSON"]
     f_name = ft_doc.name
-    f_lp = re.findall("-[a-z][a-z]-[A-Z][A-Z]", f_name)[0]
+    regexp = re.compile("-[a-z][a-z]-[A-Z][A-Z]")
+    if regexp.search(f_name):
+        f_lp = re.findall("-[a-z][a-z]-[A-Z][A-Z]", f_name)[0]
+    else:
+        f_lp = ""
     for pdGib in fileFormatList:
         f_name = f_name.split(pdGib)[0]
         f_name = f_name.split(".docx")[0]
